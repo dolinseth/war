@@ -47,7 +47,7 @@ class Card
 			puts "8"
 		elsif @cards.include? "9"
 			puts "9"
-		elsif @cards.include? "10" || @cards.include? "J" || @cards.include? "Q" || @cards.include? "K"
+		elsif (@cards.include? "10") || (@cards.include? "J") || (@cards.include? "Q") || (@cards.include? "K")
 			puts "10"
 		end
 	end
