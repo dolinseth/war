@@ -4,14 +4,30 @@ class Card
 		@number = number
 	end
 	
+	def number
+		@number
+	end
+
+	def values
+		{"J" => 11, "Q" => 12, "K" => 13, "A" => 14}
+	end
+
+	def value
+		if ["J", "Q", "K", "A"].include? @number
+			values[@number]
+		else
+			@number.to_i
+		end
+	end
+
 	def suit
-		if suit == "spades"
+		if @suit == "spades"
 			puts "spades"
-		elsif suit == "hearts"
+		elsif @suit == "hearts"
 			puts "hearts"
-		elsif suit == "clubs"
+		elsif @suit == "clubs"
 			puts "clubs"
-		elsif suit == "diamonds"
+		elsif @suit == "diamonds"
 			puts "diamonds"
 		end
 	end
@@ -62,7 +78,7 @@ class Deck
 	end
 end
 
-class War_Game
+class WarGame
 	def initialize(player_one_name = "Player 1", player_two_name = "Player 2", number_of_decks = 1)
 		@player_one_name = player_one_name
 		@player_two_name = player_two_name
@@ -73,15 +89,18 @@ class War_Game
 
 	def play
 		while @player_one.cards.count > 0 || @player_two.cards.count > 0
-			player_one_card_one = @player_one.draw.value
-			player_two_card_one = @player_two.draw.value
-			if player_one_card_one.value > player_two_card_one
-				player_one.cards << player_two_card_one
-			elsif player_two_card_one > player_one_card_one
-				player_two.cards << player_one_card_one
-			elsif player_one_card_one == player_two_card_one
-				War.new.war
+			player_one_card_one = @player_one.draw_one
+			player_two_card_one = @player_two.draw_one
+			puts "#{player_one_card_one} vs. #{player_two_card_one}"
+			if player_one_card_one.value > player_two_card_one.value
+				@player_one.cards << player_two_card_one
+			elsif player_two_card_one.value > player_one_card_one.value
+				@player_two.cards << player_one_card_one
+			elsif player_one_card_one.value == player_two_card_one.value
+				@player_two.cards << player_one_card_one
+				# War.new(@player_one, @player_two).war
 			end
+			puts "#{@player_one.cards.count} vs. #{@player_two.cards.count}"
 		end
 
 		if @player_one.cards.count == 0
@@ -98,34 +117,34 @@ class War_Game
 	end
 end
 
-class War
-	def initialize
-		player_one_card_war_bounty = @player_one.draw(3).value
-		player_two_card_war_bounty = @player_two.draw(3).value
-		player_one_card_war_decider = @player_one.draw.value
-		player_two_card_war_decider = @player_two.draw.value
-	end
+# class War
+# 	def initialize(player_one, player_two)
+# 		@player_one = player_one
+# 		@player_two = player_two
+# 		@player_one_card_war_bounty = @player_one.draw(3)
+# 		@player_two_card_war_bounty = @player_two.draw(3)
+# 		@player_one_card_war_decider = @player_one.draw_one
+# 		@player_two_card_war_decider = @player_two.draw_one
+# 	end
 
-	def war
-		if player_one_card_one == player_two_card_one
-			if player_one_card_war_decider > player_two_card_war_decider
-				player_one.cards << player_two_card_war_decider
-				player_one.cards << player_two_card_war_bounty
-			elsif player_two_card_war_decider > player_one_card_war_decider
-				player_two.cards << player_one_card_war_decider
-				player_two.cards << player_one_card_war_bounty
-			elsif player_one_card_one == player_two_card_one
-				War.new.war
-			end
-		end
-	end
+# 	def war
+# 		if @player_one_card_war_decider.value > @player_two_card_war_decider.value
+# 			player_one.cards << player_two_card_war_decider
+# 			player_one.cards << player_two_card_war_bounty
+# 		elsif player_two_card_war_decider.value > player_one_card_war_decider.value
+# 			player_two.cards << player_one_card_war_decider
+# 			player_two.cards << player_one_card_war_bounty
+# 		elsif player_one_card_one.value == player_two_card_one.value
+# 			War.new.war
+# 		end
+# 	end
 	
-	def draw(number_of_cards = 1)
-		card = @cards.sample(number_of_cards)
-		@cards = @cards - card
-		card
-	end
-end
+# 	def draw(number_of_cards = 1)
+# 		card = @cards.sample(number_of_cards)
+# 		@cards = @cards - card
+# 		card
+# 	end
+# end
 
 class Player
 	def initialize(cards)
@@ -140,6 +159,10 @@ class Player
 		card = @cards.sample(number_of_cards)
 		@cards = @cards - card
 		card
+	end
+
+	def draw_one
+		draw(1).first
 	end
 end
 
@@ -159,3 +182,5 @@ class Shoe
 		card
 	end
 end
+
+WarGame.new().play
