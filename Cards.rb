@@ -28,30 +28,6 @@ class Card
 		end
 	end
 
-	def value
-		if @cards.include? "A"
-			puts "1"
-		elsif @cards.include? "2"
-			puts "2"
-		elsif @cards.include? "3"
-			puts "3"
-		elsif @cards.include? "4"
-			puts "4"
-		elsif @cards.include? "5"
-			puts "5"
-		elsif @cards.include? "6"
-			puts "6"
-		elsif @cards.include? "7"
-			puts "7"
-		elsif @cards.include? "8"
-			puts "8"
-		elsif @cards.include? "9"
-			puts "9"
-		elsif (@cards.include? "10") || (@cards.include? "J") || (@cards.include? "Q") || (@cards.include? "K")
-			puts "10"
-		end
-	end
-	
 	def draw(number_of_cards = 1)
 		card = @cards.sample(number_of_cards)
 		@cards = @cards - card
@@ -83,30 +59,6 @@ class Deck
 		card = @cards.sample(number_of_cards)
 		@cards = @cards - card
 		card
-	end
-
-	def value
-		if @cards.include? "A"
-			puts "1"
-		elsif @cards.include? "2"
-			puts "2"
-		elsif @cards.include? "3"
-			puts "3"
-		elsif @cards.include? "4"
-			puts "4"
-		elsif @cards.include? "5"
-			puts "5"
-		elsif @cards.include? "6"
-			puts "6"
-		elsif @cards.include? "7"
-			puts "7"
-		elsif @cards.include? "8"
-			puts "8"
-		elsif @cards.include? "9"
-			puts "9"
-		elsif @cards.include? "10" || @cards.include? "J" || @cards.include? "Q" || @cards.include? "K"
-			puts "10"
-		end
 	end
 end
 
@@ -144,30 +96,6 @@ class War_Game
 		@cards = @cards - card
 		card
 	end
-
-	def value
-		if @cards.include? "A"
-			puts "1"
-		elsif @cards.include? "2"
-			puts "2"
-		elsif @cards.include? "3"
-			puts "3"
-		elsif @cards.include? "4"
-			puts "4"
-		elsif @cards.include? "5"
-			puts "5"
-		elsif @cards.include? "6"
-			puts "6"
-		elsif @cards.include? "7"
-			puts "7"
-		elsif @cards.include? "8"
-			puts "8"
-		elsif @cards.include? "9"
-			puts "9"
-		elsif @cards.include? "10" || @cards.include? "J" || @cards.include? "Q" || @cards.include? "K"
-			puts "10"
-		end
-	end
 end
 
 class War
@@ -197,30 +125,6 @@ class War
 		@cards = @cards - card
 		card
 	end
-	
-	def value
-		if @cards.include? "A"
-			puts "1"
-		elsif @cards.include? "2"
-			puts "2"
-		elsif @cards.include? "3"
-			puts "3"
-		elsif @cards.include? "4"
-			puts "4"
-		elsif @cards.include? "5"
-			puts "5"
-		elsif @cards.include? "6"
-			puts "6"
-		elsif @cards.include? "7"
-			puts "7"
-		elsif @cards.include? "8"
-			puts "8"
-		elsif @cards.include? "9"
-			puts "9"
-		elsif @cards.include? "10" || @cards.include? "J" || @cards.include? "Q" || @cards.include? "K"
-			puts "10"
-		end
-	end
 end
 
 class Player
@@ -236,30 +140,6 @@ class Player
 		card = @cards.sample(number_of_cards)
 		@cards = @cards - card
 		card
-	end
-	
-	def value
-		if @cards.include? "A"
-			puts "1"
-		elsif @cards.include? "2"
-			puts "2"
-		elsif @cards.include? "3"
-			puts "3"
-		elsif @cards.include? "4"
-			puts "4"
-		elsif @cards.include? "5"
-			puts "5"
-		elsif @cards.include? "6"
-			puts "6"
-		elsif @cards.include? "7"
-			puts "7"
-		elsif @cards.include? "8"
-			puts "8"
-		elsif @cards.include? "9"
-			puts "9"
-		elsif @cards.include? "10" || @cards.include? "J" || @cards.include? "Q" || @cards.include? "K"
-			puts "10"
-		end
 	end
 end
 
@@ -277,29 +157,5 @@ class Shoe
 		card = @cards.sample(number_of_cards)
 		@cards = @cards - card
 		card
-	end
-	
-	def value
-		if @cards.include? "A"
-			puts "1"
-		elsif @cards.include? "2"
-			puts "2"
-		elsif @cards.include? "3"
-			puts "3"
-		elsif @cards.include? "4"
-			puts "4"
-		elsif @cards.include? "5"
-			puts "5"
-		elsif @cards.include? "6"
-			puts "6"
-		elsif @cards.include? "7"
-			puts "7"
-		elsif @cards.include? "8"
-			puts "8"
-		elsif @cards.include? "9"
-			puts "9"
-		elsif @cards.include? "10" || @cards.include? "J" || @cards.include? "Q" || @cards.include? "K"
-			puts "10"
-		end
 	end
 end
