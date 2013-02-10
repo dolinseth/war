@@ -89,18 +89,7 @@ class WarGame
 
 	def play
 		while @player_one.cards.count > 0 && @player_two.cards.count > 0
-			player_one_card_one = @player_one.draw_one
-			player_two_card_one = @player_two.draw_one
-			puts "#{player_one_card_one} vs. #{player_two_card_one}"
-			if player_one_card_one.value > player_two_card_one.value
-				@player_one.cards << player_two_card_one
-			elsif player_two_card_one.value > player_one_card_one.value
-				@player_two.cards << player_one_card_one
-			elsif player_one_card_one.value == player_two_card_one.value
-				@player_two.cards << player_one_card_one
-				# War.new(@player_one, @player_two).war
-			end
-			puts "#{@player_one.cards.count} vs. #{@player_two.cards.count}"
+			WarDecider.new(@player_one, @player_two).run
 		end
 
 		if @player_one.cards.count == 0
@@ -117,47 +106,54 @@ class WarGame
 	end
 end
 
-# class War
-# 	def initialize(player_one, player_two)
-# 		@player_one = player_one
-# 		@player_two = player_two
-# 		@player_one_card_war_bounty = @player_one.draw(3)
-# 		@player_two_card_war_bounty = @player_two.draw(3)
-# 		@player_one_card_war_decider = @player_one.draw_one
-# 		@player_two_card_war_decider = @player_two.draw_one
-# 	end
+class War
+	def initialize(player_one, player_two, bounty)
+		@player_one = player_one
+		@player_two = player_two
+		@bounty = bounty
+	end
 
-# 	def war
-# 		if @player_one_card_war_decider.value > @player_two_card_war_decider.value
-# 			player_one.cards << player_two_card_war_decider
-# 			player_one.cards << player_two_card_war_bounty
-# 		elsif player_two_card_war_decider.value > player_one_card_war_decider.value
-# 			player_two.cards << player_one_card_war_decider
-# 			player_two.cards << player_one_card_war_bounty
-# 		elsif player_one_card_one.value == player_two_card_one.value
-# 			War.new.war
-# 		end
-# 	end
-	
-# 	def draw(number_of_cards = 1)
-# 		card = @cards.sample(number_of_cards)
-# 		@cards = @cards - card
-# 		card
-# 	end
-# end
+	def war
+		@bounty += @player_one.draw(3) + @player_two.draw(3)
+		puts "WAR! THE BOUNTY IS: #{@bounty}. Press enter to continue."
+		gets
+		WarDecider.new(@player_one, @player_two, @bounty).run
+	end
+end
+
+class WarDecider
+	def initialize(player_one, player_two, bounty = [])
+		@player_one = player_one
+		@player_two = player_two
+		@bounty = bounty
+	end
+
+	def run
+		player_one_card_war_decider = @player_one.draw_one
+		player_two_card_war_decider = @player_two.draw_one
+		@bounty += [player_one_card_war_decider, player_two_card_war_decider]
+
+		puts "#{player_one_card_war_decider} vs. #{player_two_card_war_decider}"
+		if player_one_card_war_decider.value > player_two_card_war_decider.value
+			@player_one.cards += @bounty
+		elsif player_two_card_war_decider.value > player_one_card_war_decider.value
+			@player_two.cards += @bounty
+		elsif player_one_card_war_decider.value == player_two_card_war_decider.value
+			War.new(@player_one, @player_two, @bounty).war
+		end
+	end
+end
 
 class Player
+	attr_accessor :cards
+
 	def initialize(cards)
 		@cards = cards
 	end
-	
-	def cards
-		@cards
-	end
-	
+
 	def draw(number_of_cards = 1)
-		card = @cards.sample(number_of_cards)
-		@cards = @cards - card
+		card = cards.sample(number_of_cards)
+		@cards = cards - card
 		card
 	end
 
