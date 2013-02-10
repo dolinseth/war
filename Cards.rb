@@ -89,17 +89,15 @@ class WarGame
 
 	def play
 		while @player_one.cards.count > 0 && @player_two.cards.count > 0
-			@player_one_card_one = []
-			@player_two_card_one = []
-			@player_one_card_one << @player_one.draw_one
-			@player_two_card_one << @player_two.draw_one
-			puts "#{@player_one_card_one.first} vs. #{@player_two_card_one.first}"
-			if @player_one_card_one.first.value > @player_two_card_one.first.value
-				@player_one.cards << @player_two_card_one.first
-			elsif @player_two_card_one.first.value > @player_one_card_one.first.value
-				@player_two.cards << @player_one_card_one.first
-			elsif @player_one_card_one.first.value == @player_two_card_one.first.value
-				@player_two.cards << @player_one_card_one.first
+			player_one_card_one = @player_one.draw_one
+			player_two_card_one = @player_two.draw_one
+			puts "#{player_one_card_one} vs. #{player_two_card_one}"
+			if player_one_card_one.value > player_two_card_one.value
+				@player_one.cards << player_two_card_one
+			elsif player_two_card_one.value > player_one_card_one.value
+				@player_two.cards << player_one_card_one
+			elsif player_one_card_one.value == player_two_card_one.value
+				@player_two.cards << player_one_card_one
 				# War.new(@player_one, @player_two).war
 			end
 			puts "#{@player_one.cards.count} vs. #{@player_two.cards.count}"
